@@ -1,9 +1,18 @@
 <template>
   <q-page padding >
-    <input v-model="message" /><!--bind v-model to message-->
+    <!--bind v-model to message-->
     <!--add event button next to input,-->
+    <input 
+    v-model="message" 
+    @keyup.esc="clearMessage"
+    @keyup.enter="alertMessage"
+    />
     <button @click= "clearMessage">Clear</button>
-    <h5>{{message}}</h5>
+    <h5
+     v-if="message.length"
+     class="border-grey"
+    >{{message}}</h5>
+    <h6 v-else>No meesage was entered</h6>
   </q-page>
 </template>
 
@@ -22,7 +31,21 @@ export default{
    methods: {
      clearMessage(){
        this.message = ''
+     },
+      alertMessage(){
+       alert(this.message)
      }
+
+    // handleKeyup(e){
+      // if(e.keyCode == 27){
+        // this.clearMessage()
+      // }
+       //else if(e.keyCode == 13){
+    //      this.alertMessage()
+    //    }
+
+    //  },
+    
    }
 
 
@@ -30,3 +53,8 @@ export default{
   
 
 </script>
+<style>
+ .border-grey{
+   border:1px solid grey
+ }
+</style>
